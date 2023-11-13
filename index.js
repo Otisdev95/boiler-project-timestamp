@@ -18,26 +18,48 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+const isInvalidDate = (date) => date.toUTCString("Invalid Date");
 
 // your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
-});
-
 app.get("/api/:date", (req, res) => {
+  date = new Date(req.params.date);
 
-  const inputDate = req.params.date;
+  if (isInvalidDate) {
+    date = new Date(+req.params.date);
+  };
 
-  const isValidDate = !isNaN(new Date(inputDate).getTime());
-
-  if (isValidDate){
-    return res.json({ error: 'Invalid date format' });
+  if (isInvalidDate) {
+    res.json({ error: "Invalid Date" });
+    return;
   }
 
-  const unixTimestamp = new Date(inputDate).getTime();
-
-  res.json({ unix: unixTimestamp });
+  res.json({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
 });
+
+app.get("/api", (req, res) => {
+  res.json({
+    unix: new Date().getTime(),
+    utc: new Date().toUTCString()
+  });
+});
+
+// app.get("/api/:date", (req, res) => {
+
+//   const inputDate = req.params.date;
+
+//   const isValidDate = !isNaN(new Date(inputDate).getTime());
+
+//   if (isValidDate){
+//     return res.json({ error: 'Invalid date format' });
+//   }
+
+//   const unixTimestamp = new Date(inputDate).getTime();
+
+//   res.json({ unix: unixTimestamp });
+// });
 
 
 
