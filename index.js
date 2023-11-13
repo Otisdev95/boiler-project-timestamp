@@ -24,11 +24,11 @@ const isInvalidDate = (date) => date.toUTCString("Invalid Date");
 app.get("/api/:date", (req, res) => {
   date = new Date(req.params.date);
 
-  if (isInvalidDate) {
+  if (isInvalidDate(date)) {
     date = new Date(+req.params.date);
   };
 
-  if (isInvalidDate) {
+  if (isInvalidDate(date)) {
     res.json({ error: "Invalid Date" });
     return;
   }
