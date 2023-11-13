@@ -18,8 +18,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-// const isInvalidDate = (date) => date.toUTCString === "Invalid Date";
-
 // your first API endpoint... 
 app.get("/api/:date", (req, res) => {
   let date = new Date(req.params.date);
