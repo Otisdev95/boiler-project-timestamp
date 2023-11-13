@@ -41,25 +41,11 @@ app.get("/api/:date", (req, res) => {
 
 app.get("/api", (req, res) => {
   res.json({
-    unix: new Date().getTime(),
+    unix: Date.now(),
     utc: new Date().toUTCString()
   });
 });
 
-// app.get("/api/:date", (req, res) => {
-
-//   const inputDate = req.params.date;
-
-//   const isValidDate = !isNaN(new Date(inputDate).getTime());
-
-//   if (isValidDate){
-//     return res.json({ error: 'Invalid date format' });
-//   }
-
-//   const unixTimestamp = new Date(inputDate).getTime();
-
-//   res.json({ unix: unixTimestamp });
-// });
 
 
 
