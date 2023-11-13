@@ -30,7 +30,9 @@ app.get("/api/:date", (req, res) => {
 
   const isValidDate = !isNaN(new Date(inputDate).getTime());
 
-  if (isValidDate) return res.json({ error: 'Invalid date format' });
+  if (isValidDate){
+    return res.json({ error: 'Invalid date format' });
+  }
 
   const unixTimestamp = new Date(inputDate).getTime();
 
